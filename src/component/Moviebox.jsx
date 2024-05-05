@@ -78,7 +78,7 @@ const MovieBox = ({ movies }) => {
         <div>
           <FontAwesomeIcon
             icon={faStar}
-            style={{ color: "yellow", marginRight: "5px" }}
+            style={{ color: "#ffea00", marginRight: "5px" }}
           />
           {movies.vote_average.toFixed(2)}
         </div>

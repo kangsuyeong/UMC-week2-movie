@@ -49,11 +49,8 @@ const MovieDetail = () => {
   `;
 
   const MovieStar = styled.div`
-    border: 1px solid red;
     font-size: 23px;
     margin-bottom: 10px;
-    display: grid;
-    grid-template-columns: repeat(8, 1fr);
   `;
 
   useEffect(() => {
@@ -73,7 +70,9 @@ const MovieDetail = () => {
           <Col lg={6}>
             <StyleRightSection>
               <MovieTitle>{movies?.title}</MovieTitle>
-              <MovieStar>평점{movies?.vote_average}111111</MovieStar>
+              <MovieStar>
+                평점{"⭐️".repeat(Math.floor(movies.vote_average))}
+              </MovieStar>
               <MovieItem>개봉일 {movies?.release_date}</MovieItem>
               <MovieItem>줄거리</MovieItem>
               <MovieOverview>
