@@ -1,15 +1,15 @@
 import React from "react";
-import Moviebox from "./Moviebox";
 import { Col, Container, Row } from "react-bootstrap";
+import MovieBox from "./Moviebox";
 
 const Movielist = ({ movies }) => {
-  console.log("영화목록", movies);
+  console.log("확인", movies);
   return (
     <Container>
       <Row>
         {movies.map((item, index) => (
-          <Col lg={3}>
-            <Moviebox key={index} movies={item} />
+          <Col key={index} lg={3}>
+            <MovieBox movies={item} />
           </Col>
         ))}
       </Row>

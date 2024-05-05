@@ -1,88 +1,74 @@
 @import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
 
-.notosanskr * { 
- font-family: 'Noto Sans KR', sans-serif;
+.notosanskr * {
+  font-family: "Noto Sans KR", sans-serif;
 }
 
-body{
-    margin : 0;
-    font-family: 'Noto Sans KR', sans-serif;
-
+body {
+  margin: 0;
+  font-family: "Noto Sans KR", sans-serif;
 }
 
-.line{
-    border:1px solid red;
+.line {
+  border: 1px solid red;
 }
 
-.movie-box{
-    width: 300px;
-    padding: 0;
-    margin: 10px;
-    border: 2px solid black;
-    position: relative;
+.movie-box {
+  width: 300px;
+  padding: 0;
+  margin: 10px;
+  border: 2px solid black;
+  position: relative;
 }
 
-.movie-box:hover{
-    opacity: 1;
+.movie-box:hover {
+  opacity: 1;
 }
 .overview {
-    color: #fff;
-    position: absolute; left: 0; bottom: 0;
-    background: rgba(0,0,0,0.5);
-    width: 100%;
-    padding: 15px;
-    box-sizing: border-box;
-    opacity: 0;
-    transition: opacity 0.35s ease-in-out;
+  color: #fff;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  width: 100%;
+  padding: 15px;
+  box-sizing: border-box;
+  opacity: 0;
+  transition: opacity 0.35s ease-in-out;
 }
 
-
-
-.movie-box .movie-img{
-   height: 400px;
-   width: 100%;
-   object-fit: cover;
-   overflow: hidden;  
+.movie-box .movie-img {
+  height: 400px;
+  width: 100%;
+  object-fit: cover;
+  overflow: hidden;
 }
 
-.movie-info{
-    display: flex;
-    justify-content: space-around;
-    height: 50px;
-    align-items: center;
+.movie-info {
+  display: flex;
+  justify-content: space-around;
+  height: 50px;
+  align-items: center;
 }
 
-.movie-list-area{
-    display: flex;
+.movie-list-area {
+  display: flex;
 }
-
-
 
 .movie-box .overview {
-    color: #fff;
-    position: absolute;
-    left: 0; bottom: 0;
-    background: rgba(0,0,0,0.5);
-    height: 100%;
-    width: 100%;
-    padding: 15px;
-    box-sizing: border-box;
-    opacity: 0;
-    transition: opacity 0.35s ease-in-out;
-  }
+  color: #fff;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  height: 100%;
+  width: 100%;
+  padding: 15px;
+  box-sizing: border-box;
+  opacity: 0;
+  transition: opacity 0.35s ease-in-out;
+}
 
-  .movie-box:hover .overview {
-    opacity: 1;
-  }
-  /* .overview h3 {
-    font-size: 24px;
-    padding-bottom: 0.4em;
-    overflow:hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    text-transform: uppercase;
-  } */
-  .overview p {
-    font-size: 15px;
-    text-overflow: ellipsis;
-  }
+.movie-box:hover .overview {
+  opacity: 1;
+}
