@@ -85,7 +85,6 @@ const MainPage = () => {
   };
   const onChangeKeyword = (e) => {
     const keywordCheck = /[\w\s가-힣0-9]{2,}/; //문자열, 숫자, 스페이스 포함
-    console.log("키워드확인", keywordCheck.test(e.target.value));
     if (keywordCheck.test(e.target.value)) {
       setKeyword(e.target.value);
     } else {
@@ -93,7 +92,9 @@ const MainPage = () => {
     }
   };
   useEffect(() => {
-    getMovies();
+    if (keyword != "") {
+      getMovies();
+    }
   }, [keyword]);
 
   return (
