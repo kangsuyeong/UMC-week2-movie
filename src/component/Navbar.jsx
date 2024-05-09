@@ -33,12 +33,12 @@ const StyleMenuItem = styled.div`
   &:hover {
     transform: scale(1.1);
   }
-  ${(props) =>
+  /* ${(props) =>
     props.login &&
     css`
       color: #ffff;
       font-weight: 500;
-    `}
+    `} */
   ${(props) =>
     props.id == props.clickBtn &&
     css`
@@ -79,13 +79,21 @@ const Navbar = ({ login, setLogin }) => {
     setLogin(!login);
   };
 
+  const goToSignUp = (e) => {
+    navigate("/signup");
+    setClickBtn(e.target.textContent);
+  };
+
   return (
     <StyleNav>
       <StyleTitle onClick={goToHome}>UMC Movie</StyleTitle>
 
       <StyleMenuArea>
-        <StyleMenuItem onClick={changeLogin} login={login}>
+        {/* <StyleMenuItem onClick={changeLogin} login={login}>
           {login ? "로그아웃" : "로그인"}
+        </StyleMenuItem> */}
+        <StyleMenuItem onClick={goToSignUp} id={"회원가입"} clickBtn={clickBtn}>
+          회원가입
         </StyleMenuItem>
 
         <StyleMenuItem onClick={goToPopular} id={"Popular"} clickBtn={clickBtn}>

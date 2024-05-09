@@ -5,11 +5,15 @@ import { useNavigate } from "react-router-dom";
 import { styled } from "styled-components";
 
 const StyleMovieBox = styled.div`
-  width: 300px;
-  padding: 0;
-  margin: 10px;
+  width: 100%;
+  height: 100%;
+  padding: 5px;
+  margin: 0px;
   position: relative;
   color: #b3b3b3;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
 `;
 
 const StyleOverview = styled.div`
@@ -31,16 +35,24 @@ const StyleOverview = styled.div`
 const StyleMovieInfo = styled.div`
   display: flex;
   justify-content: space-around;
-  height: 50px;
+  height: 3rem;
   align-items: center;
   background-color: #191919;
+  padding: 5px;
 `;
 
 const StyleMovieImg = styled.img`
-  height: 400px;
-  width: 100%;
-  object-fit: cover;
   overflow: hidden;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+`;
+
+const MovieImgArea = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
 `;
 
 const MovieBox = ({ movies }) => {
@@ -68,11 +80,12 @@ const MovieBox = ({ movies }) => {
           {movies.overview ? movies.overview : "줄거리가 제공되지 않습니다."}
         </p>
       </StyleOverview>
-      <div>
+
+      <MovieImgArea>
         <StyleMovieImg
           src={`https://image.tmdb.org/t/p/w500${movies.poster_path}`}
         />
-      </div>
+      </MovieImgArea>
       <StyleMovieInfo>
         <div>{movies.title}</div>
         <div>

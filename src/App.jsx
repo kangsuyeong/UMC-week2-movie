@@ -10,6 +10,9 @@ import UpComing from "./page/UpComing";
 import { useState } from "react";
 import MovieDetail from "./page/MovieDetail";
 import NotFoundPage from "./page/NotFoundPage";
+import SignUp from "./page/SignUp";
+import Footer from "./component/Footer";
+import LoginPage from "./page/LoginPage";
 
 function App() {
   const [login, setLogin] = useState(false);
@@ -18,6 +21,8 @@ function App() {
       <Navbar login={login} setLogin={setLogin} />
       <Routes>
         <Route path="/" element={<MainPage />} />
+        <Route path="/signup" element={<SignUp />} />
+        <Route path="/login" element={<LoginPage />} />
         <Route path="/popular" element={<PopularPage />} />
         <Route path="/nowplaying" element={<NowPlayingPage />} />
         <Route path="/toprated" element={<TopRatedPage />} />
@@ -25,6 +30,7 @@ function App() {
         <Route path="/movie/:title" element={<MovieDetail />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
+      <Footer />
     </>
   );
 }
