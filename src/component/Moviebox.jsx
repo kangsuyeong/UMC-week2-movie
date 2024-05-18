@@ -26,7 +26,9 @@ const StyleOverview = styled.div`
   width: 100%;
   padding: 15px;
   box-sizing: border-box;
-  opacity: ${(p) => (p.isHovered ? 1 : 0)};
+  overflow: hidden;
+  text-overflow: ellipsis;
+  opacity: ${(p) => (p.$isHovered ? 1 : 0)};
   transition: opacity 0.35s ease-in-out;
   font-size: 15px;
   text-overflow: ellipsis;
@@ -35,10 +37,25 @@ const StyleOverview = styled.div`
 const StyleMovieInfo = styled.div`
   display: flex;
   justify-content: space-around;
-  height: 3rem;
+  height: 4rem;
   align-items: center;
   background-color: #191919;
   padding: 5px;
+`;
+
+const Title = styled.div`
+  font-size: 1em;
+  width: 75%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const Star = styled.div`
+  width: 25%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 const StyleMovieImg = styled.img`
@@ -59,7 +76,7 @@ const MovieBox = ({ movies }) => {
   const [isHovered, setIsHovered] = useState(false);
   const navigate = useNavigate();
   const showDetail = () => {
-    navigate(`/movie/${movies.original_title}`, {
+    navigate(`/movie/${movies.id}`, {
       state: {
         title: movies.title,
         vote_average: movies.vote_average,
@@ -75,10 +92,8 @@ const MovieBox = ({ movies }) => {
       onMouseLeave={() => setIsHovered(false)}
       onClick={showDetail}
     >
-      <StyleOverview isHovered={isHovered}>
-        <p>
-          {movies.overview ? movies.overview : "줄거리가 제공되지 않습니다."}
-        </p>
+      <StyleOverview $isHovered={isHovered}>
+        {movies.overview ? movies.overview : "줄거리가 제공되지 않습니다."}
       </StyleOverview>
 
       <MovieImgArea>
@@ -87,14 +102,14 @@ const MovieBox = ({ movies }) => {
         />
       </MovieImgArea>
       <StyleMovieInfo>
-        <div>{movies.title}</div>
-        <div>
+        <Title>{movies.title}</Title>
+        <Star>
           <FontAwesomeIcon
             icon={faStar}
             style={{ color: "#ffea00", marginRight: "5px" }}
           />
           {movies.vote_average.toFixed(2)}
-        </div>
+        </Star>
       </StyleMovieInfo>
     </StyleMovieBox>
   );

@@ -3,7 +3,7 @@ import { Col, Container, Row } from "react-bootstrap";
 import MovieBox from "./Moviebox";
 
 const Movielist = ({ movies }) => {
-  console.log("확인", movies);
+  console.log("영화목록", movies);
   return (
     <Container>
       <Row>

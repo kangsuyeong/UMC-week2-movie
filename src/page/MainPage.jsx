@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import { Container, Row } from "react-bootstrap";
 import { styled } from "styled-components";
 import Movielist from "../component/Movielist";
+import { ClipLoader } from "react-spinners";
 
 const Background = styled.div`
   background-color: black;
@@ -53,8 +54,12 @@ const ShowSearchArea = styled.div`
 `;
 
 const ShowMovieBox = styled.div`
-  width: 1000px;
-  height: 600px;
+  display: flex;
+  justify-content: center;
+  color: white;
+  max-width: 1000px;
+  max-height: 600px;
+  width: 100%;
   overflow-y: auto;
   &::-webkit-scrollbar {
     width: 5px;
@@ -65,9 +70,18 @@ const ShowMovieBox = styled.div`
   }
 `;
 
+const StyleLoading = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+  color: white;
+`;
+
 const MainPage = () => {
   const [keyword, setKeyword] = useState("");
   const [movieData, setMovieData] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const getMovies = async () => {
     const options = {
@@ -79,24 +93,46 @@ const MainPage = () => {
       },
     };
     let url = `https://api.themoviedb.org/3/search/movie?query=${keyword}&include_adult=false&language=ko-KR&page=1`;
-    let response = await fetch(url, options);
-    let data = await response.json();
-    setMovieData(data.results);
-  };
-  const onChangeKeyword = (e) => {
-    const keywordCheck = /[\w\s가-힣0-9]{2,}/; //문자열, 숫자, 스페이스 포함
-    if (keywordCheck.test(e.target.value)) {
-      setKeyword(e.target.value);
-    } else {
-      setKeyword("");
+    setLoading(true);
+    try {
+      let response = await fetch(url, options);
+      let data = await response.json();
+      setMovieData(data.results);
+    } catch (error) {
+      console.error("Error searching movies:", error);
     }
+    setLoading(false);
   };
+  // const onChangeKeyword = (e) => {
+  //   const keywordCheck = /[\w\s가-힣0-9]{2,}/; //문자열, 숫자, 스페이스 포함
+  //   if (keywordCheck.test(e.target.value)) {
+  //     setKeyword(e.target.value);
+  //   } else {
+  //     setKeyword("");
+  //   }
+  // };
   useEffect(() => {
-    if (keyword != "") {
-      getMovies();
-    }
+    getMovies();
   }, [keyword]);
 
+  const onChangeKeyword = (e) => {
+    console.log("입력 값 : ", e.target.value);
+  };
+
+  let alertTimer;
+  const debounceFun = (e) => {
+    // 앞선 타이머를 리셋
+    // 따라서 마지막 함수가 실행 (타이핑을 멈추고선 함수실행)
+    if (alertTimer) {
+      clearTimeout(alertTimer);
+    }
+
+    // 타이머 시작
+    alertTimer = setTimeout(() => {
+      console.log("입력한 키워드 : ", e.target.value);
+      setKeyword(e.target.value);
+    }, 1000);
+  };
   return (
     <Background>
       <Container>
@@ -109,7 +145,7 @@ const MainPage = () => {
         </StyleFindText>
         <div>
           <StyleSearchBox
-            onChange={onChangeKeyword}
+            onChange={debounceFun}
             type="text"
             placeholder="키워드를 입력해주세요."
           />
@@ -123,7 +159,16 @@ const MainPage = () => {
       <ShowSearchArea>
         {keyword && (
           <ShowMovieBox>
-            <Movielist movies={movieData} />
+            {loading ? (
+              <StyleLoading>
+                <ClipLoader color="#ffff" loading={loading} size={150} />
+                <h3>로딩중입니다...</h3>
+              </StyleLoading>
+            ) : movieData.length > 0 ? (
+              <Movielist movies={movieData} />
+            ) : (
+              <h3>검색 내용이 없습니다.</h3>
+            )}
           </ShowMovieBox>
         )}
       </ShowSearchArea>

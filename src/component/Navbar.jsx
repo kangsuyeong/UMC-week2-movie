@@ -18,9 +18,10 @@ const StyleTitle = styled.div`
   &:hover {
     transform: scale(1.1);
   }
-  font-size: 25px;
+  font-size: 1.6em;
   font-weight: 900;
   color: red;
+  border: 1px solid red;
 `;
 
 const StyleMenuArea = styled.div`
@@ -33,14 +34,8 @@ const StyleMenuItem = styled.div`
   &:hover {
     transform: scale(1.1);
   }
-  /* ${(props) =>
-    props.login &&
-    css`
-      color: #ffff;
-      font-weight: 500;
-    `} */
   ${(props) =>
-    props.id == props.clickBtn &&
+    props.id == props.$clickBtn &&
     css`
       color: #ffff;
       font-weight: 500;
@@ -92,31 +87,39 @@ const Navbar = ({ login, setLogin }) => {
         {/* <StyleMenuItem onClick={changeLogin} login={login}>
           {login ? "로그아웃" : "로그인"}
         </StyleMenuItem> */}
-        <StyleMenuItem onClick={goToSignUp} id={"회원가입"} clickBtn={clickBtn}>
+        <StyleMenuItem
+          onClick={goToSignUp}
+          id={"회원가입"}
+          $clickBtn={clickBtn}
+        >
           회원가입
         </StyleMenuItem>
 
-        <StyleMenuItem onClick={goToPopular} id={"Popular"} clickBtn={clickBtn}>
+        <StyleMenuItem
+          onClick={goToPopular}
+          id={"Popular"}
+          $clickBtn={clickBtn}
+        >
           Popular
         </StyleMenuItem>
         <StyleMenuItem
           onClick={goToNowPlaying}
           id={"Now Playing"}
-          clickBtn={clickBtn}
+          $clickBtn={clickBtn}
         >
           Now Playing
         </StyleMenuItem>
         <StyleMenuItem
           onClick={goToTopRated}
           id={"Top Rated"}
-          clickBtn={clickBtn}
+          $clickBtn={clickBtn}
         >
           Top Rated
         </StyleMenuItem>
         <StyleMenuItem
           onClick={goToUpComing}
           id={"Upcoming"}
-          clickBtn={clickBtn}
+          $clickBtn={clickBtn}
         >
           Upcoming
         </StyleMenuItem>

@@ -6,9 +6,9 @@ const PopularPage = () => {
     "https://api.themoviedb.org/3/movie/popular?language=ko-KR&region=KR&page=1";
 
   return (
-    <div>
+    <>
       <Moviepage url={url} />
-    </div>
+    </>
   );
 };
 
