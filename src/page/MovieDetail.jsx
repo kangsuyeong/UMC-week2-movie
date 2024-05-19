@@ -75,9 +75,9 @@ const ContainerSecond = styled(Container)`
   text-align: center;
 `;
 const ActorArea = styled.div`
-  display: flex;
+  /* display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: center; */
 `;
 
 const SubTitle = styled.div`
@@ -101,7 +101,6 @@ const MovieDetail = () => {
     let url = `https://api.themoviedb.org/3/movie/${id}?language=ko-KR`;
     let response = await fetch(url, options);
     let data = await response.json();
-    console.log("디테일", data);
     setMovieData(data);
   };
 
@@ -169,9 +168,9 @@ const MovieDetail = () => {
       <ContainerSecond>
         <SubTitle>출현자 및 제작진</SubTitle>
         <ActorArea>
-          {/* {movieCredits && <SlideBox credits={movieCredits} />} */}
+          {movieCredits && <SlideBox credits={movieCredits} />}
 
-          <Row>
+          {/* <Row>
             {movieCredits.crew && (
               <Col lg={2}>
                 <Profile credits={movieCredits.crew[0]} />
@@ -183,7 +182,7 @@ const MovieDetail = () => {
                 <Profile credits={item} />
               </Col>
             ))}
-          </Row>
+          </Row> */}
         </ActorArea>
       </ContainerSecond>
     </StyleBackground>

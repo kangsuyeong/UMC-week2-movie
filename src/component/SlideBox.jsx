@@ -9,12 +9,12 @@ import { Col, Row } from "react-bootstrap";
 const Styled_Slide = styled(Slider)`
   .slick-list {
     //얘로 크기조정 했음
-    background-color: #f0f9ff;
-    color: black;
+    /* color: black; */
+    /* width: 300px;
+    height: 300px; */
   }
   .slick-prev,
   .slick-next {
-    border: 1px solid blue;
     z-index: 1;
     width: 40px;
     height: 40px;
@@ -24,14 +24,14 @@ const Styled_Slide = styled(Slider)`
   }
   .slick-prev:before,
   .slick-next:before {
-    /* font-size: 50px; */
-    color: red;
-    /* opacity: 0.3; */
+    font-size: 35px;
+    color: white;
+    opacity: 0.3;
   }
 `;
 
 const SlideBox = ({ credits }) => {
-  console.log("credtis", credits);
+  console.log("credits확인", credits.cast[0]);
   var settings = {
     dots: true,
     infinite: true,
@@ -41,36 +41,32 @@ const SlideBox = ({ credits }) => {
   };
   return (
     <Styled_Slide {...settings}>
-      <div className="container1">
-        <div class="item color1">Item1</div>
-        <div class="item color2">Item2</div>
-        <div class="item color3">Item3</div>
-        <div class="item color4">Item4</div>
-        <div class="item color5">Item5</div>
-        <div class="item color1">Item6</div>
-        <div class="item color2">Item7</div>
-        <div class="item color3">Item8</div>
-        <div class="item color4">Item9</div>
-        <div class="item color5">Item10</div>
-      </div>
-      {/* <div>
-        <h3>1</h3>
-      </div>
       <div>
-        <h3>2</h3>
+        <Row>
+          {credits && (
+            <Col lg={2}>
+              <Profile credits={credits.crew[0]} />
+            </Col>
+          )}
+          {credits &&
+            credits.cast.slice(0, 5).map((item) => (
+              <Col lg={2}>
+                <Profile credits={item} />
+              </Col>
+            ))}
+        </Row>
       </div>
+
       <div>
-        <h3>3</h3>
+        <Row>
+          {credits &&
+            credits.cast.slice(6, 12).map((item) => (
+              <Col lg={2}>
+                <Profile credits={item} />
+              </Col>
+            ))}
+        </Row>
       </div>
-      <div>
-        <h3>4</h3>
-      </div>
-      <div>
-        <h3>5</h3>
-      </div>
-      <div>
-        <h3>6</h3>
-      </div> */}
     </Styled_Slide>
   );
 };
