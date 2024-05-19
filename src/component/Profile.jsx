@@ -24,7 +24,6 @@ const Background = styled.div`
 `;
 
 const Profile = ({ credits }) => {
-  console.log("credits", credits);
   return (
     <Background>
       <ProfileImg
@@ -36,7 +35,11 @@ const Profile = ({ credits }) => {
       />
       <ProfileInfo>
         <ProfileName>{credits?.original_name}</ProfileName>
-        <ProfileName>{credits?.character} 역</ProfileName>
+        {credits.character ? (
+          <ProfileName>{credits?.character} 역</ProfileName>
+        ) : (
+          <ProfileName>{credits.job}</ProfileName>
+        )}
       </ProfileInfo>
     </Background>
   );

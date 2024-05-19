@@ -21,7 +21,6 @@ const StyleTitle = styled.div`
   font-size: 1.6em;
   font-weight: 900;
   color: red;
-  border: 1px solid red;
 `;
 
 const StyleMenuArea = styled.div`

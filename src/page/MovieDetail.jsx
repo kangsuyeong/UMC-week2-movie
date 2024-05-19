@@ -3,6 +3,7 @@ import { Col, Container, Row } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import { styled } from "styled-components";
 import Profile from "../component/Profile";
+import SlideBox from "../component/SlideBox";
 
 const StyleBackground = styled.div`
   background-color: black;
@@ -116,7 +117,7 @@ const MovieDetail = () => {
     let url = `https://api.themoviedb.org/3/movie/${id}/credits?language=ko-KR`;
     let response = await fetch(url, options);
     let data = await response.json();
-    console.log("credits", data);
+    console.log("cast", data);
     setMovieCredits(data);
   };
 
@@ -168,8 +169,16 @@ const MovieDetail = () => {
       <ContainerSecond>
         <SubTitle>출현자 및 제작진</SubTitle>
         <ActorArea>
+          {/* {movieCredits && <SlideBox credits={movieCredits} />} */}
+
           <Row>
-            {movieCredits.cast?.map((item, index) => (
+            {movieCredits.crew && (
+              <Col lg={2}>
+                <Profile credits={movieCredits.crew[0]} />
+              </Col>
+            )}
+
+            {movieCredits.cast?.slice(0, 11).map((item, index) => (
               <Col key={index} lg={2}>
                 <Profile credits={item} />
               </Col>
