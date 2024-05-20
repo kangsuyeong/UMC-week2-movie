@@ -8,7 +8,7 @@ import { ClipLoader } from "react-spinners";
 
 const Background = styled.div`
   background-color: black;
-  min-height: 81vh;
+  min-height: 84vh;
 `;
 const StyleUpBlock = styled.div`
   background-color: #696969;

@@ -9,7 +9,8 @@ const StyleNav = styled.div`
   background-color: black;
   color: #d9d9d9;
   padding: 0 30px;
-  height: 65px;
+  height: 8vh;
+  border: 1px solid red;
 `;
 
 const StyleTitle = styled.div`

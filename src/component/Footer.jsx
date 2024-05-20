@@ -5,8 +5,9 @@ import { styled } from "styled-components";
 const Background = styled.div`
   border-top: 1px solid rgb(33, 33, 33);
   background-color: black;
-  height: 80px;
   color: #6e6e6e;
+  border: 1px solid red;
+  height: 8vh;
 `;
 
 const CopyText = styled.div`
