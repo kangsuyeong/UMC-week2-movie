@@ -4,7 +4,6 @@ import { styled } from "styled-components";
 
 const BackGround = styled.div`
   background-color: black;
-  height: 100%;
   color: white;
   display: flex;
   justify-content: center;
@@ -15,18 +14,18 @@ const Title = styled.div`
   font-weight: 700;
   display: flex;
   justify-content: center;
-  margin-bottom: 20px;
+  margin-bottom: 0.5em;
   border-bottom: 1px solid lightgray;
-  padding-bottom: 10px;
+  padding-bottom: 0.5em;
 `;
 
 const InputArea = styled.div`
-  margin-bottom: 10px;
+  margin-bottom: 0.5em;
 `;
 
 const SignUpForm = styled.form`
-  width: 400px;
-  margin: 40px;
+  width: 25em;
+  margin: 1em 0;
 `;
 
 const InputBox = styled.input`
@@ -74,6 +73,11 @@ const SignUp = () => {
   const [nameError, setNameError] = useState("");
   const [nameAvailable, setNameAvailable] = useState(false);
 
+  //id
+  const [id, setID] = useState("");
+  const [idError, setIDError] = useState("");
+  const [idAvailable, setIDAvailable] = useState(false);
+
   //이메일
   const [email, setEmail] = useState("");
   const [emailError, setEmailError] = useState("");
@@ -96,6 +100,7 @@ const SignUp = () => {
     useState(false);
 
   const navigate = useNavigate();
+
   // name Handler
   const onChangeNameHandler = (e) => {
     const nameValue = e.target.value;
@@ -114,6 +119,27 @@ const SignUp = () => {
     } else {
       setNameError("");
       setNameAvailable(true);
+    }
+  };
+
+  // id Handler
+  const onChangeIDHandler = (e) => {
+    const idValue = e.target.value;
+    setID(idValue);
+    idCheckHandler(idValue);
+  };
+
+  const idCheckHandler = async (id) => {
+    const idForm = /^[a-z]+[a-z0-9]{5,19}$/g;
+    if (id == "") {
+      setIDError("아이디을 입력해주세요.");
+      setIDAvailable(false);
+    } else if (!idForm.test(id)) {
+      setIDError("아이디는 6-20자의 영소문자, 숫자만 입력이 가능합니다.");
+      setIDAvailable(false);
+    } else {
+      setIDError("");
+      setIDAvailable(true);
     }
   };
 
@@ -215,6 +241,9 @@ const SignUp = () => {
     if (name == "") {
       setNameError("이름을 입력해주세요.");
     }
+    if (id == "") {
+      setIDError("아이디을 입력해주세요.");
+    }
 
     if (email == "") {
       setEmailError("이메일을 입력해주세요.");
@@ -232,6 +261,7 @@ const SignUp = () => {
     }
     if (
       nameAvailable &&
+      idAvailable &&
       emailAvailable &&
       ageAvailable &&
       passwordAvailable &&
@@ -240,6 +270,7 @@ const SignUp = () => {
       alert("회원가입에 성공하였습니다.");
       const user = {
         name,
+        id,
         email,
         age,
         password,
@@ -272,6 +303,18 @@ const SignUp = () => {
               />
             </div>
             {nameError && <ErrorMessage>{nameError}</ErrorMessage>}
+          </InputArea>
+          <InputArea>
+            <label htmlFor="id">아이디</label>
+            <div>
+              <InputBox
+                type="text"
+                placeholder="아이디"
+                id="id"
+                onChange={onChangeIDHandler}
+              />
+            </div>
+            {idError && <ErrorMessage>{idError}</ErrorMessage>}
           </InputArea>
           <InputArea>
             <label htmlFor="email">이메일</label>
