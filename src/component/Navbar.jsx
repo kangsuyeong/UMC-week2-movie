@@ -78,6 +78,11 @@ const Navbar = ({ login, setLogin }) => {
     setClickBtn(e.target.textContent);
   };
 
+  const goToLogin = (e) => {
+    navigate("/login");
+    setClickBtn(e.target.textContent);
+  };
+
   return (
     <StyleNav>
       <StyleTitle onClick={goToHome}>UMC Movie</StyleTitle>
@@ -86,6 +91,9 @@ const Navbar = ({ login, setLogin }) => {
         {/* <StyleMenuItem onClick={changeLogin} login={login}>
           {login ? "로그아웃" : "로그인"}
         </StyleMenuItem> */}
+        <StyleMenuItem onClick={goToLogin} id={"로그인"} $clickBtn={clickBtn}>
+          로그인
+        </StyleMenuItem>
         <StyleMenuItem
           onClick={goToSignUp}
           id={"회원가입"}
