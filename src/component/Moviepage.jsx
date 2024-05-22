@@ -5,6 +5,7 @@ import { styled } from "styled-components";
 
 const Stylebackground = styled.div`
   background-color: black;
+  padding: 30px;
 `;
 
 const StyleLoading = styled.div`
