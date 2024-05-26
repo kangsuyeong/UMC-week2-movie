@@ -1,7 +1,9 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { styled, css } from "styled-components";
+import Sidebar from "./Sidebar";
+import Sidebar2 from "./Sidebar2";
 
 const StyleNav = styled.div`
   display: flex;
@@ -26,69 +28,47 @@ const StyleTitle = styled.div`
 
 const StyleMenuArea = styled.div`
   display: flex;
-  @media screen and (max-width: 760px) {
+  @media screen and (max-width: 770px) {
     display: none;
   }
 `;
-const StyleMenuItem = styled.div`
+
+const Menu = styled(Link)`
+  text-decoration: none;
   padding: 10px;
-  cursor: pointer;
   color: #d9d9d9;
   &:hover {
     transform: scale(1.1);
   }
-  ${(props) =>
-    props.id == props.$clickBtn &&
-    css`
-      color: #ffff;
-      font-weight: 500;
-    `}
+
   ${(props) =>
     props.logout &&
     css`
       color: #ffff;
       font-weight: 500;
     `}
-  &:active {
-    color: #ffff;
-    font-weight: 500;
+  ${(props) =>
+    props.menuPath == props.pathname &&
+    css`
+      color: #ffff;
+      font-weight: 500;
+    `}
+`;
+
+const SideArea = styled.div`
+  display: none;
+  @media screen and (max-width: 770px) {
+    display: block;
   }
 `;
 
 const Navbar = ({ login, setLogin, setUserName }) => {
-  const [clickBtn, setClickBtn] = useState("");
   const navigate = useNavigate();
+  const { pathname } = useLocation();
 
   const goToHome = () => {
     navigate("/");
-    setClickBtn("");
     window.location.href = "/";
-  };
-  const goToPopular = (e) => {
-    navigate("/popular");
-    setClickBtn(e.target.textContent);
-  };
-  const goToNowPlaying = (e) => {
-    navigate("/nowplaying");
-    setClickBtn(e.target.textContent);
-  };
-  const goToTopRated = (e) => {
-    navigate("/toprated");
-    setClickBtn(e.target.textContent);
-  };
-  const goToUpComing = (e) => {
-    navigate("/upcoming");
-    setClickBtn(e.target.textContent);
-  };
-
-  const goToSignUp = (e) => {
-    navigate("/signup");
-    setClickBtn(e.target.textContent);
-  };
-
-  const goToLogin = (e) => {
-    navigate("/login");
-    setClickBtn(e.target.textContent);
   };
 
   const Logout = () => {
@@ -121,62 +101,36 @@ const Navbar = ({ login, setLogin, setUserName }) => {
       <StyleTitle onClick={goToHome}>UMC Movie</StyleTitle>
       <StyleMenuArea>
         {login ? (
-          <StyleMenuItem
-            onClick={Logout}
-            id={"로그아웃"}
-            $clickBtn={clickBtn}
-            logout={login}
-          >
+          <Menu onClick={Logout} logout={login}>
             로그아웃
-          </StyleMenuItem>
+          </Menu>
         ) : (
           <>
-            <StyleMenuItem
-              onClick={goToLogin}
-              id={"로그인"}
-              $clickBtn={clickBtn}
-            >
+            <Menu to="/login" menuPath={"/login"} pathname={pathname}>
               로그인
-            </StyleMenuItem>
-            <StyleMenuItem
-              onClick={goToSignUp}
-              id={"회원가입"}
-              $clickBtn={clickBtn}
-            >
+            </Menu>
+            <Menu to="signup" menuPath={"/signup"} pathname={pathname}>
               회원가입
-            </StyleMenuItem>
+            </Menu>
           </>
         )}
 
-        <StyleMenuItem
-          onClick={goToPopular}
-          id={"Popular"}
-          $clickBtn={clickBtn}
-        >
+        <Menu to="/popular" menuPath={"/popular"} pathname={pathname}>
           Popular
-        </StyleMenuItem>
-        <StyleMenuItem
-          onClick={goToNowPlaying}
-          id={"Now Playing"}
-          $clickBtn={clickBtn}
-        >
+        </Menu>
+        <Menu to="/nowplaying" menuPath={"/nowplaying"} pathname={pathname}>
           Now Playing
-        </StyleMenuItem>
-        <StyleMenuItem
-          onClick={goToTopRated}
-          id={"Top Rated"}
-          $clickBtn={clickBtn}
-        >
+        </Menu>
+        <Menu to="/toprated" menuPath={"/toprated"} pathname={pathname}>
           Top Rated
-        </StyleMenuItem>
-        <StyleMenuItem
-          onClick={goToUpComing}
-          id={"Upcoming"}
-          $clickBtn={clickBtn}
-        >
+        </Menu>
+        <Menu to="/upcoming" menuPath={"/upcoming"} pathname={pathname}>
           Upcoming
-        </StyleMenuItem>
+        </Menu>
       </StyleMenuArea>
+      <SideArea>
+        <Sidebar width={280} login={login} setLogin={setLogin} />
+      </SideArea>
     </StyleNav>
   );
 };

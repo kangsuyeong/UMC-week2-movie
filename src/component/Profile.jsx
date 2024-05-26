@@ -3,10 +3,12 @@ import { styled } from "styled-components";
 
 const ProfileImg = styled.img`
   width: 100%;
-  height: 15em;
 `;
 const ProfileName = styled.div`
   font-size: 1em;
+  @media screen and (max-width: 600px) {
+    font-size: 0.8em;
+  }
 `;
 
 const ProfileInfo = styled.div`
@@ -18,14 +20,12 @@ const ProfileInfo = styled.div`
 `;
 
 const Background = styled.div`
-  width: 100%;
-  height: 100%;
-  padding: 1em;
+  padding: 0 10px;
 `;
 
 const Profile = ({ credits }) => {
   return (
-    <>
+    <Background>
       <ProfileImg
         src={
           credits.profile_path
@@ -41,7 +41,7 @@ const Profile = ({ credits }) => {
           <ProfileName>{credits.job}</ProfileName>
         )}
       </ProfileInfo>
-    </>
+    </Background>
   );
 };
 

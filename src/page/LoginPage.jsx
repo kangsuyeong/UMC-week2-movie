@@ -120,10 +120,11 @@ const LoginPage = ({ setLogin }) => {
         user
       );
       setLogin(true);
-      navigate("/");
-      alert("로그인 되었습니다.");
       //토큰 저장
       localStorage.setItem("token", response.data.token);
+
+      navigate("/");
+      alert("로그인 되었습니다.");
     } catch (error) {
       console.log(error);
       if (error.response.status == 401) {

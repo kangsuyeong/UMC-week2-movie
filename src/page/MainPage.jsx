@@ -48,6 +48,10 @@ const StyleSearchBox = styled.input`
   padding: 20px;
   margin-right: 20px;
   font-weight: 700px;
+  @media screen and (max-width: 600px) {
+    width: 250px;
+    height: 25px;
+  }
 `;
 
 const ShowSearchArea = styled.div`

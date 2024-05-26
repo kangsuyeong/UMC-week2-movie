@@ -37,49 +37,27 @@ const Styled_Slide = styled(Slider)`
 `;
 
 const SlideBox = ({ credits }) => {
-  console.log("credits확인", credits.cast[0]);
   var settings = {
     dots: true,
     infinite: true,
     speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
+    slidesToShow: 6,
+    slidesToScroll: 6,
+    responsive: [
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 3,
+        },
+      },
+    ],
   };
   return (
     <Styled_Slide {...settings}>
-      {/* <ProfileList>
-        {credits.cast.slice(0, 5).map((item, index) => (
-          <Profile key={index} credits={item} />
-        ))}
-        <div>1</div>
-        <div>2</div>
-      </ProfileList> */}
-      <div>
-        <Row>
-          {credits && (
-            <Col lg={2}>
-              <Profile credits={credits.crew[0]} />
-            </Col>
-          )}
-          {credits &&
-            credits.cast.slice(0, 5).map((item) => (
-              <Col lg={2}>
-                <Profile credits={item} />
-              </Col>
-            ))}
-        </Row>
-      </div>
-
-      <div>
-        <Row>
-          {credits &&
-            credits.cast.slice(6, 12).map((item) => (
-              <Col lg={2}>
-                <Profile credits={item} />
-              </Col>
-            ))}
-        </Row>
-      </div>
+      {credits && <Profile credits={credits.crew[0]} />}
+      {credits &&
+        credits.cast.slice(0, 11).map((item) => <Profile credits={item} />)}
     </Styled_Slide>
   );
 };
