@@ -134,6 +134,7 @@ const MediaInfo = styled.div`
   z-index: 100;
   @media screen and (max-width: 992px) {
     width: 50%;
+    padding: 0 20px;
   }
   @media screen and (max-width: 600px) {
     width: 100%;
