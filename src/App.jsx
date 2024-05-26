@@ -16,13 +16,17 @@ import LoginPage from "./page/LoginPage";
 
 function App() {
   const [login, setLogin] = useState(false);
+  const [userName, setUserName] = useState("");
   return (
     <>
-      <Navbar login={login} setLogin={setLogin} />
+      <Navbar login={login} setLogin={setLogin} setUserName={setUserName} />
       <Routes>
-        <Route path="/" element={<MainPage />} />
+        <Route
+          path="/"
+          element={<MainPage login={login} userName={userName} />}
+        />
         <Route path="/signup" element={<SignUp />} />
-        <Route path="/login" element={<LoginPage />} />
+        <Route path="/login" element={<LoginPage setLogin={setLogin} />} />
         <Route path="/popular" element={<PopularPage />} />
         <Route path="/nowplaying" element={<NowPlayingPage />} />
         <Route path="/toprated" element={<TopRatedPage />} />

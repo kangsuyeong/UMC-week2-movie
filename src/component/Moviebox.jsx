@@ -14,6 +14,9 @@ const StyleMovieBox = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
+  @media screen and (max-width: 992px) {
+    font-size: 14px;
+  }
 `;
 
 const StyleOverview = styled.div`
@@ -44,7 +47,6 @@ const StyleMovieInfo = styled.div`
 `;
 
 const Title = styled.div`
-  font-size: 1em;
   width: 75%;
   display: flex;
   justify-content: center;

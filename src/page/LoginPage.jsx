@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { styled } from "styled-components";
+import axios from "axios";
 
 const BackGround = styled.div`
   background-color: black;
@@ -51,7 +52,8 @@ const ErrorMessage = styled.div`
   font-size: 15px;
 `;
 
-const LoginPage = () => {
+const LoginPage = ({ setLogin }) => {
+  const navigate = useNavigate();
   const { pathname } = useLocation();
 
   //id
@@ -108,12 +110,34 @@ const LoginPage = () => {
       setIDAvailable(true);
     }
   };
+
+  const loginHandler = async (e) => {
+    e.preventDefault();
+    const user = { username: id, password };
+    try {
+      const response = await axios.post(
+        "http://localhost:8080/auth/login",
+        user
+      );
+      setLogin(true);
+      navigate("/");
+      alert("로그인 되었습니다.");
+      //토큰 저장
+      localStorage.setItem("token", response.data.token);
+    } catch (error) {
+      console.log(error);
+      if (error.response.status == 401) {
+        alert("아이디나 비밀번호가 틀립니다.");
+      }
+    }
+  };
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [pathname]);
   return (
     <BackGround>
-      <SignUpForm>
+      <SignUpForm onSubmit={loginHandler}>
         <Title>로그인 페이지</Title>
         <div>
           <InputArea>

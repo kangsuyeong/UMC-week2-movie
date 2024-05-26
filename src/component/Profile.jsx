@@ -25,7 +25,7 @@ const Background = styled.div`
 
 const Profile = ({ credits }) => {
   return (
-    <Background>
+    <>
       <ProfileImg
         src={
           credits.profile_path
@@ -41,7 +41,7 @@ const Profile = ({ credits }) => {
           <ProfileName>{credits.job}</ProfileName>
         )}
       </ProfileInfo>
-    </Background>
+    </>
   );
 };
 

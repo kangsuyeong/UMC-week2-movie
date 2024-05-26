@@ -3,8 +3,14 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { styled } from "styled-components";
-import Profile from "./Profile";
 import { Col, Row } from "react-bootstrap";
+import Profile from "./Profile";
+
+const ProfileList = styled.div`
+  /* display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px; */
+`;
 
 const Styled_Slide = styled(Slider)`
   .slick-list {
@@ -41,6 +47,13 @@ const SlideBox = ({ credits }) => {
   };
   return (
     <Styled_Slide {...settings}>
+      {/* <ProfileList>
+        {credits.cast.slice(0, 5).map((item, index) => (
+          <Profile key={index} credits={item} />
+        ))}
+        <div>1</div>
+        <div>2</div>
+      </ProfileList> */}
       <div>
         <Row>
           {credits && (

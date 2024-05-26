@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { styled } from "styled-components";
+import axios from "axios";
 
 const BackGround = styled.div`
   background-color: black;
@@ -25,7 +26,7 @@ const InputArea = styled.div`
 
 const SignUpForm = styled.form`
   width: 25em;
-  margin: 1em 0;
+  margin: 20px;
 `;
 
 const InputBox = styled.input`
@@ -53,6 +54,10 @@ const LoginArea = styled.div`
   display: flex;
   margin-top: 30px;
   justify-content: space-between;
+  @media screen and (max-width: 600px) {
+    flex-direction: column;
+    align-items: center;
+  }
 `;
 
 const ErrorMessage = styled.div`
@@ -62,6 +67,7 @@ const ErrorMessage = styled.div`
 
 const Leftmsg = styled.div`
   font-size: 15px;
+  margin-bottom: 10px;
 `;
 const Rightmsg = styled.div`
   cursor: pointer;
@@ -173,7 +179,6 @@ const SignUp = () => {
 
   const ageCheckHandler = async (age) => {
     const ageForm = /^[0-9]+$/; // 숫자만 가능
-    console.log("확인", Number.isNaN(parseInt(3.0)));
     if (age == "") {
       setAgeError("나이을 입력해주세요.");
       setAgeAvailable(false);
@@ -236,7 +241,7 @@ const SignUp = () => {
     }
   };
 
-  const signUpHandler = (e) => {
+  const signUpHandler = async (e) => {
     e.preventDefault();
     if (name == "") {
       setNameError("이름을 입력해주세요.");
@@ -267,17 +272,25 @@ const SignUp = () => {
       passwordAvailable &&
       passwordConfirmAvailable
     ) {
-      alert("회원가입에 성공하였습니다.");
+      //회원가입 API
       const user = {
         name,
-        id,
         email,
         age,
+        username: id,
         password,
-        passwordConfirm,
+        passwordCheck: passwordConfirm,
       };
-      console.log("유저정보", user);
-      navigate("/login");
+      try {
+        await axios.post("http://localhost:8080/auth/signup", user);
+        alert("회원가입에 성공하였습니다.");
+        navigate("/login");
+      } catch (error) {
+        // if (error.response.status == 409) {
+        //   console.log("409");
+        // }
+        console.log(error);
+      }
     } else {
       console.log("회원가입실패");
     }

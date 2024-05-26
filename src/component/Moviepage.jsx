@@ -5,7 +5,6 @@ import { styled } from "styled-components";
 
 const Stylebackground = styled.div`
   background-color: black;
-  padding: 30px;
 `;
 
 const StyleLoading = styled.div`
@@ -36,7 +35,7 @@ const Moviepage = ({ url }) => {
 
   useEffect(() => {
     getMovies();
-  }, []);
+  }, [url]);
   return (
     <Stylebackground>
       {loading ? (

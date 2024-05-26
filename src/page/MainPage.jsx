@@ -5,6 +5,7 @@ import { Container, Row } from "react-bootstrap";
 import { styled } from "styled-components";
 import Movielist from "../component/Movielist";
 import { ClipLoader } from "react-spinners";
+import { useLocation } from "react-router-dom";
 
 const Background = styled.div`
   background-color: black;
@@ -33,6 +34,10 @@ const StyleFindText = styled.div`
   font-weight: 700;
   color: #d9d9d9;
   margin: 50px;
+  @media screen and (max-width: 600px) {
+    font-size: 30px;
+    margin: 50px 20px;
+  }
 `;
 
 const StyleSearchBox = styled.input`
@@ -78,11 +83,10 @@ const StyleLoading = styled.div`
   color: white;
 `;
 
-const MainPage = () => {
+const MainPage = ({ login, userName }) => {
   const [keyword, setKeyword] = useState("");
   const [movieData, setMovieData] = useState([]);
   const [loading, setLoading] = useState(false);
-
   const getMovies = async () => {
     const options = {
       method: "GET",
@@ -103,21 +107,10 @@ const MainPage = () => {
     }
     setLoading(false);
   };
-  // const onChangeKeyword = (e) => {
-  //   const keywordCheck = /[\w\s가-힣0-9]{2,}/; //문자열, 숫자, 스페이스 포함
-  //   if (keywordCheck.test(e.target.value)) {
-  //     setKeyword(e.target.value);
-  //   } else {
-  //     setKeyword("");
-  //   }
-  // };
+
   useEffect(() => {
     getMovies();
   }, [keyword]);
-
-  const onChangeKeyword = (e) => {
-    console.log("입력 값 : ", e.target.value);
-  };
 
   let alertTimer;
   const debounceFun = (e) => {
@@ -136,7 +129,9 @@ const MainPage = () => {
   return (
     <Background>
       <Container>
-        <StyleUpBlock>환영합니다</StyleUpBlock>
+        <StyleUpBlock>
+          {login ? `${userName}님 환영합니다` : "환영합니다"}
+        </StyleUpBlock>
       </Container>
       <StyleDownBlock>
         <StyleFindText>
