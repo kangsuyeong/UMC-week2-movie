@@ -131,6 +131,7 @@ const Navbar = ({ login, setLogin, setUserName }) => {
       <SideArea>
         <Sidebar width={280} login={login} setLogin={setLogin} />
       </SideArea>
+      {/* <Sidebar2 width={320} /> */}
     </StyleNav>
   );
 };

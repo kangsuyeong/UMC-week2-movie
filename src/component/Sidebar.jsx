@@ -13,7 +13,7 @@ const WrapSidebar = styled.div`
   border-left: 1px solid rgb(33, 33, 33);
   color: white;
   background-color: black;
-  position: absolute;
+  position: fixed;
   top: 0;
   bottom: 0;
   right: 0;
@@ -21,10 +21,8 @@ const WrapSidebar = styled.div`
   height: 100%;
   z-index: 101;
   width: ${(props) => props.width && `${props.width}px`};
-
   transform: ${(props) =>
     props.isOpen ? "translateX(0)" : `translateX(${props.width}px)`};
-  display: ${(props) => !props.isOpen && "none"};
 `;
 
 const Content = styled.div`

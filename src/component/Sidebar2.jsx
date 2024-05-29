@@ -1,52 +1,68 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styled, { css } from "styled-components";
 
-const Sidebar2 = () => {
-  const [isOpen, setIsOpen] = useState(false);
+const Sidebar2 = ({ width = 280, children }) => {
+  const [isOpen, setOpen] = useState(false);
+  const [xPosition, setX] = useState(-width);
+  const side = useRef();
+
+  // button 클릭 시 토글
+  const toggleMenu = () => {
+    if (xPosition < 0) {
+      setX(0);
+      setOpen(true);
+    } else {
+      setX(-width);
+      setOpen(false);
+    }
+  };
+
+  // 사이드바 외부 클릭시 닫히는 함수
+  const handleClose = async (e) => {
+    let sideArea = side.current;
+    let sideCildren = side.current.contains(e.target);
+    if (isOpen && (!sideArea || !sideCildren)) {
+      await setX(-width);
+      await setOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("click", handleClose);
+    return () => {
+      window.removeEventListener("click", handleClose);
+    };
+  });
+
   return (
     <>
-      <Container>
-        <button onClick={() => setIsOpen(true)}>열기</button>
-      </Container>
-      <SidebarBox isOpen={isOpen}>
-        <button onClick={() => setIsOpen(false)}>X</button>
-        <p>이름: 내이름</p>
-      </SidebarBox>
+      <div className="container">
+        <div
+          ref={side}
+          className="sidebar"
+          style={{
+            width: `${width}px`,
+            height: "100%",
+            transform: `translatex(${-xPosition}px)`,
+          }}
+        >
+          <button onClick={() => toggleMenu()} className="button">
+            {isOpen ? (
+              <span>X</span>
+            ) : (
+              <img
+                src="images/avatar.png"
+                alr="contact open button"
+                className="openBtn"
+              />
+            )}
+          </button>
+          <div className="content">{children}</div> //사이드바 컴포넌트 내부
+          값이 구현되는 위치
+        </div>
+      </div>
     </>
   );
 };
-
-const Container = styled.div`
-  margin: 0;
-  overflow: hidden; // translate(-100%)로 올라간 스크롤 없애줌
-  background: gray;
-`;
-
-const SidebarBox = styled.div`
-  position: absolute;
-  top: 0;
-  right: 0;
-  transform: translateX(100%); // 사이드바 위로 올려둠
-  width: 12.5rem;
-  height: 100%;
-  padding: 0.875rem;
-  border-radius: 0.25rem;
-  background: black;
-  opacity: 0; // 투명도 조절하여 부드럽게 보이게하기
-  transition: transform 500ms linear, opacity 500ms linear;
-  pointer-events: none; // 사이드바 비활성화 일 때 클릭 안 됨
-
-  & button {
-    cursor: pointer;
-  }
-
-  ${(props) =>
-    props.isOpen &&
-    css`
-      transform: translateX(0);
-      opacity: 1;
-      pointer-events: visible;
-    `}
-`;
 
 export default Sidebar2;
